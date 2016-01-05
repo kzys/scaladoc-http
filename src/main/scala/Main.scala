@@ -1,8 +1,8 @@
 package com.pactdisc.scaladoc
-import tools.nsc.ScalaDoc
+import tools.nsc
 
 object Main {
   def main(args: Array[String]) = {
-    ScalaDoc.main(args)
+    nsc.ScalaDoc.main(Array("-usejavacp", "-doc-generator", "com.pactdisc.scaladoc.Doclet", "-d", "build", "src/main/scala/Main.scala"))
   }
 }
