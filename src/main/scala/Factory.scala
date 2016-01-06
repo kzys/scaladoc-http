@@ -16,17 +16,8 @@ class Factory(universe: doc.Universe, index: doc.Index) extends doc.html.HtmlFac
 
   override def generate() {
     libResources foreach (s => copyResource("lib/" + s))
-
-    new page.Index(universe, index) writeFor this
-    new page.IndexScript(universe, index) writeFor this
-    if (index.hasDeprecatedMembers) {
-      new page.DeprecatedIndex(universe, index) writeFor this
-    }
-
+    new IndexPage(universe, index) writeFor this
     writeTemplates(_ writeFor this)
-    for (letter <- index.firstLetterIndex) {
-      new page.ReferenceIndex(letter._1, index, universe) writeFor this
-    }
   }
 
   override def writeTemplates(writeForThis: doc.html.HtmlPage => Unit) {
