@@ -1,14 +1,28 @@
 package com.pactdisc.scaladoc
+
+import java.nio.file.{StandardCopyOption, Files}
+
 import tools.nsc.doc
 import tools.nsc.doc.html.page
 import tools.nsc.doc.model.DocTemplateEntity
 
 class Factory(universe: doc.Universe, index: doc.Index) extends doc.html.HtmlFactory(universe, index) {
+  def copyResource(path: String) {
+    val pathInJar = "/scala/tools/nsc/doc/html/resource/" + path
+    val src = getClass.getResourceAsStream(pathInJar)
+    val dest = siteRoot.toPath.resolve(path)
+    Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING)
+  }
+
   override def generate() {
+    libResources foreach (s => copyResource("lib/" + s))
+
     new page.Index(universe, index) writeFor this
     new page.IndexScript(universe, index) writeFor this
-    if (index.hasDeprecatedMembers)
+    if (index.hasDeprecatedMembers) {
       new page.DeprecatedIndex(universe, index) writeFor this
+    }
+
     writeTemplates(_ writeFor this)
     for (letter <- index.firstLetterIndex) {
       new page.ReferenceIndex(letter._1, index, universe) writeFor this
