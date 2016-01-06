@@ -11,7 +11,20 @@ import scalatags.Text.all._
 class IndexPage(universe: doc.Universe, val index: doc.Index) extends HtmlPage {
   override protected def title = "Index"
 
-  override def body = Tag.unparsed(tags.body())
+  private def createListItem(root: doc.model.Package): tags.Tag = {
+    val packages = root.packages.map(entity => {
+      createListItem(entity)
+    })
+
+    li(a(href := relativeLinkTo(root))(root.name), ul(packages : _*))
+  }
+
+  override def body = {
+    Tag.unparsed(tags.body(
+      h1("Index"),
+      ul(universe.rootPackage.packages.map(createListItem(_)) : _*)
+    ))
+  }
 
   override protected def headers =
     Tag.group(link(href := relativeLinkTo(List("index.css", "lib"))))
