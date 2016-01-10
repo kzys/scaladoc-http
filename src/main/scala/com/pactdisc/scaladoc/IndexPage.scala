@@ -27,7 +27,9 @@ class IndexPage(universe: doc.Universe, val index: doc.Index) extends HtmlPage {
   }
 
   override protected def headers =
-    Tag.group(link(rel := "stylesheet", href := relativeLinkTo(List("index.css", "lib"))))
+    <xml:group>
+      <link ref="stylesheet" href="/assets/index.css" />
+    </xml:group>
 
   override def path = List("index.html")
 }
