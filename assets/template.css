@@ -1,0 +1,13 @@
+@import url("/lib/template.css");
+
+body.js #sidebar {
+    width: 300px;
+}
+
+body.js #body {
+    margin-left: 300px;
+}
+
+#textfilter {
+    display: none;
+}
