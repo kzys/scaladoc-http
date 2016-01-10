@@ -2,8 +2,7 @@ package com.pactdisc.scaladoc
 
 import scala.tools.nsc.doc
 import scala.tools.nsc.doc.html.HtmlPage
-import scalatags.Text.{all => tags} // because HtmlPage has "body"
-import scalatags.Text.all._
+import scala.xml.Elem
 
 /**
   * Created by kazuyoshi on 1/5/16.
@@ -11,20 +10,17 @@ import scalatags.Text.all._
 class IndexPage(universe: doc.Universe, val index: doc.Index) extends HtmlPage {
   override protected def title = "Index"
 
-  private def createListItem(root: doc.model.Package): tags.Tag = {
+  private def createListItem(root: doc.model.Package): Elem = {
     val packages = root.packages.map(entity => {
       createListItem(entity)
     })
-
-    li(a(href := relativeLinkTo(root))(root.name), ul(packages : _*))
+    <li><a href={relativeLinkTo(root)}>{root.name}</a><ul>{packages}</ul></li>
   }
 
-  override def body = {
-    Tag.unparsed(tags.body(
-      h1("Index"),
-      ul(universe.rootPackage.packages.map(createListItem(_)) : _*)
-    ))
-  }
+  override def body =
+    <body>
+      <ul>{universe.rootPackage.packages.map(createListItem(_))}</ul>
+    </body>
 
   override protected def headers =
     <xml:group>

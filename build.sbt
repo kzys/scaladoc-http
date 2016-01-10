@@ -6,6 +6,5 @@ version := "0.1.0"
 scalaVersion := "2.12.0-M3"
 
 libraryDependencies ++= Seq(
-  "org.scala-lang" % "scala-compiler" % "2.12.0-M3",
-  "com.lihaoyi" % "scalatags_2.11" % "0.5.3"
+  "org.scala-lang" % "scala-compiler" % "2.12.0-M3"
 )
