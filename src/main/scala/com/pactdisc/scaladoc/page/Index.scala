@@ -1,4 +1,4 @@
-package com.pactdisc.scaladoc
+package com.pactdisc.scaladoc.page
 
 import scala.tools.nsc.doc
 import scala.tools.nsc.doc.html.HtmlPage
@@ -7,7 +7,7 @@ import scala.xml.Elem
 /**
   * Created by kazuyoshi on 1/5/16.
   */
-class IndexPage(universe: doc.Universe, val index: doc.Index) extends HtmlPage {
+class Index(universe: doc.Universe, val index: doc.Index) extends HtmlPage {
   override protected def title = "Index"
 
   private def createListItem(root: doc.model.Package): Elem = {
@@ -18,7 +18,7 @@ class IndexPage(universe: doc.Universe, val index: doc.Index) extends HtmlPage {
   }
 
   override def body =
-    <body>
+    <body>`
       <ul>{universe.rootPackage.packages.map(createListItem(_))}</ul>
     </body>
 

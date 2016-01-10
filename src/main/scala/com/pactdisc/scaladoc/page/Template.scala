@@ -1,14 +1,14 @@
-package com.pactdisc.scaladoc
+package com.pactdisc.scaladoc.page
 
+import scala.tools.nsc.doc.Universe
 import scala.tools.nsc.doc.html.HtmlPage
-import tools.nsc.doc.Universe
-import tools.nsc.doc.html.page.Template
-import tools.nsc.doc.html.page.diagram.DiagramGenerator
-import tools.nsc.doc.model.DocTemplateEntity
+import scala.tools.nsc.doc.html.page
+import scala.tools.nsc.doc.html.page.diagram.DiagramGenerator
+import scala.tools.nsc.doc.model.DocTemplateEntity
 
-class EntityPage(universe: Universe, diagramGenerator: DiagramGenerator, entity: DocTemplateEntity) extends HtmlPage {
+class Template(universe: Universe, diagramGenerator: DiagramGenerator, entity: DocTemplateEntity) extends HtmlPage {
   // Since "body" is defined as val in Template, inheriting from the class doesn't work
-  val original = new Template(universe, diagramGenerator, entity)
+  val original = new page.Template(universe, diagramGenerator, entity)
 
   override val headers =
     <xml:group>

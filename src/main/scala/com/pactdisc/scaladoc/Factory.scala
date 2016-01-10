@@ -2,6 +2,8 @@ package com.pactdisc.scaladoc
 
 import java.nio.file.{StandardCopyOption, Files}
 
+import com.pactdisc.scaladoc.page.{Index, Template}
+
 import tools.nsc.doc
 import tools.nsc.doc.model.DocTemplateEntity
 
@@ -16,7 +18,7 @@ class Factory(universe: doc.Universe, index: doc.Index) extends doc.html.HtmlFac
   override def generate() {
     Files.createDirectories(siteRoot.toPath.resolve("lib"))
     libResources foreach (s => copyResource("lib/" + s))
-    new IndexPage(universe, index) writeFor this
+    new Index(universe, index) writeFor this
     writeTemplates(_ writeFor this)
   }
 
@@ -25,7 +27,7 @@ class Factory(universe: doc.Universe, index: doc.Index) extends doc.html.HtmlFac
 
     def writeTemplate(tpl: DocTemplateEntity) {
       if (!(written contains tpl)) {
-        writeForThis(new EntityPage(universe, null, tpl))
+        writeForThis(new Template(universe, null, tpl))
         written += tpl
         tpl.templates collect {
           case d: DocTemplateEntity => d
