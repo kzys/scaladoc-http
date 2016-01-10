@@ -3,7 +3,6 @@ package com.pactdisc.scaladoc
 import java.nio.file.{StandardCopyOption, Files}
 
 import tools.nsc.doc
-import tools.nsc.doc.html.page
 import tools.nsc.doc.model.DocTemplateEntity
 
 class Factory(universe: doc.Universe, index: doc.Index) extends doc.html.HtmlFactory(universe, index) {
@@ -15,6 +14,7 @@ class Factory(universe: doc.Universe, index: doc.Index) extends doc.html.HtmlFac
   }
 
   override def generate() {
+    Files.createDirectories(siteRoot.toPath.resolve("lib"))
     libResources foreach (s => copyResource("lib/" + s))
     new IndexPage(universe, index) writeFor this
     writeTemplates(_ writeFor this)
