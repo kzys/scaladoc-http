@@ -1,3 +1,5 @@
+[![wercker status](https://app.wercker.com/status/48c5abf8cbf3772346b3bc0555c92649/m "wercker status")](https://app.wercker.com/project/bykey/48c5abf8cbf3772346b3bc0555c92649)
+
 Build
 
 ```
