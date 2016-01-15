@@ -9,7 +9,7 @@ build:
         code: ./sbt assembly
     - script:
         name: Scala 2.11.x
-        code: git clone -d 1 -b 2.11.x https://github.com/scala/scala.git
+        code: git clone --depth 1 -b 2.11.x https://github.com/scala/scala.git
     - script:
         name: Scaladoc
         code: ./scaladoc scala/src/library/
