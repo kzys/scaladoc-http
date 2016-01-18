@@ -11,7 +11,7 @@ object Main {
   def listFiles(root: String): Iterable[Path] = {
     val predicate = new Predicate[Path] {
       override def test(path: Path) = {
-        path.toString.endsWith(".scala")
+        path.toString.endsWith(".scala") || path.toString.endsWith(".java")
       }
     }
     Files.walk(Paths.get(root)).filter(predicate).collect(Collectors.toList()).asScala
